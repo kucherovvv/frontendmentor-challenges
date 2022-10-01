@@ -1,0 +1,165 @@
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url('./assets/fonts/static/PlusJakartaSans-ExtraBold.ttf') format("truetype");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url('./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf') format("truetype");
+    font-weight: normal;
+}
+
+$color-primary: #212153;
+$color-primary-light: #6d6da7;
+$color-primary-tint: #f7f9ff;
+$color-primary-tint-2: #e8eeff;
+$color-primary-dark: #121236;
+
+$color-accent: #f58271;
+
+$color-dark-grey-1: #333;
+$color-dark-grey-2: #666;
+$color-light-grey-1: #999;
+$color-light-grey-2: #bbb;
+$color-light-grey-3: #eee;
+
+*,*::after,*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-family: 'PlusJakartaSans';
+    font-size: 1.4rem;
+    color: $color-dark-grey-1;
+    background: $color-primary-tint;
+}
+.notifications {
+    margin: 5rem;
+    background: white;
+    box-shadow: 0 2rem 3rem -1rem rgba($color-primary,.1);
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    max-width: 80rem;
+    margin: 5rem auto;
+    &__top-box {
+        display: flex;
+        align-items: center;
+    }
+    &__heading {
+        font-weight: bold;
+        margin-right: 1rem;
+        font-size: 2.5rem;
+    }
+    &__badge {
+        margin-right: auto;
+        color: $color-light-grey-3;
+        border-radius: .5rem;
+        padding: .2rem 1rem;
+        font-weight: bold;
+        background: $color-primary;
+    }
+    &__list {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+    &__item {
+        margin-bottom: .6rem;
+    }
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    font-weight: bold;
+    color: $color-primary;
+    cursor: pointer;
+    &:hover {
+        color: $color-primary-light;
+    }
+    &:active {
+        color: $color-primary-dark;
+    }
+}
+
+.btn {
+    outline: none;
+    cursor: pointer;
+    &-muted {
+        border: 0;
+        background: none;
+        padding: .25rem .4rem;
+        color: $color-dark-grey-2;
+        &:hover {
+            color: $color-light-grey-1;
+        }
+        &:active {
+            color: $color-dark-grey-1;
+        }
+    }
+}
+
+.notification {
+    padding: 1.5rem;
+    display: flex;
+    border-radius: .5rem;
+    align-items: flex-start;
+    &__avatar {
+        width: 3.5rem;
+        flex: 0;
+        margin-right: 1.5rem;
+    }
+    &__username {
+        font-weight: bold;
+        color: $color-primary-dark;
+    }
+    &__time {
+        font-size: 1.2rem;
+        color: $color-light-grey-2;
+        margin-top: .3rem;
+    }
+    &__main-box {
+        flex: 1;
+    }
+    &__text {
+        color: $color-dark-grey-2;
+        flex: 1;
+    }
+    &__details {
+        border: 1px solid $color-light-grey-3;
+        color: $color-dark-grey-2;
+        padding: 1rem 1.5rem;
+        border-radius: .5rem;
+        margin-top: 1rem;
+        &:hover {
+            background: $color-primary-tint-2;
+            border-color: transparent;
+            cursor: pointer;
+        }
+    }
+    &_unread {
+        background: $color-primary-tint;
+    }
+    &__pic {
+        width: 3.5rem;
+        float: right;
+        margin-left: 1rem;
+        border-radius: .5rem;
+        &:hover {
+            outline: .3rem solid $color-primary-tint-2;
+            cursor: pointer;
+        }
+    }
+    
+    &_unread &__text::after {
+        content: ' \25CF';
+        color: $color-accent;
+        font-size: .8rem;
+        vertical-align: middle;
+        margin-left: .3rem;
+    }
+}

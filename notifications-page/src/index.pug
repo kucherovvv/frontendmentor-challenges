@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+    head
+        title notification
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="style.css")
+        style.
+            .attribution { font-size: 11px; text-align: center; position: fixed; bottom: .5rem; right: 0; left: 0; }
+            .attribution a { color: hsl(228, 45%, 44%); }
+    body 
+        include _data
+
+        .notifications
+            .notifications__top-box
+                h2.notifications__heading Notifications
+                .notifications__badge 3
+                .btn.btn-muted Mark all as read
+            .notifications__list
+                each notif in notifs
+                    .notification.notifications__item(class={ notification_unread: notif.unread })
+                        img.notification__avatar(src=`assets/images/avatar-${notif.username.toLowerCase().split(' ').join('-')}.webp`)
+                        .notification__main-box 
+                            if notif.pic 
+                                img.notification__pic(src=`assets/images/${notif.pic}`)
+                            div #[a.notification__username=notif.username] #[span.notification__text!=notif.text]
+                            .notification__time=notif.time
+                            if notif.details 
+                                .notification__details=notif.details
+
+        .attribution.
+            Challenge by #[a(href='https://www.frontendmentor.io?ref=challenge' target='_blank') Frontend Mentor]. 
+            Coded by #[a(href='https://github.com/kucherovvv') Vladimir Kucherov].
+        script(src="app.js")

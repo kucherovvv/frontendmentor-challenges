@@ -1,5 +1,4 @@
 [build]
   command = "cd .. && npm i && npm run build-challenge test"
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
   functions = "netlify/functions"
   publish = "/dist"

@@ -1,4 +1,0 @@
-[build]
-  command = "CHALLENGE_DIRNAME=$(basename $(pwd)) && cd .. && npm i && npm run build-challenge $CHALLENGE_DIRNAME"
-  functions = "netlify/functions"
-  publish = "/dist"

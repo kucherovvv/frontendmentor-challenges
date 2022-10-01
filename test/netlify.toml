@@ -1,4 +1,4 @@
 [build]
-  command = "cd .. && npm run build test"
+  command = "cd .. && npm run build-challenge test"
   functions = "netlify/functions"
   publish = "/dist"

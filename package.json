@@ -10,12 +10,20 @@
 
     "live-server": "func() { npx live-server --watch=\"$1/dist\" --open=\"$1/dist\"; }; func",
 
-    "prepare-challenge": "func() { [ -d \"$1\" ] && { [ -d \"$1/dist\" ] || mkdir \"$1/dist\"; } }; func",
+    "check-dir": "func() { [ -d \"$1\" ] && { [ -d \"$1/dist\" ] || mkdir \"$1/dist\"; } }; func",
 
-    "build-challenge": "func() { npm-run-all \"prepare-challenge -- $1\" --parallel \"build:* -- $1\"; }; func",
-    "watch-challenge": "func() { npm-run-all \"prepare-challenge -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func",
+    "build-challenge": "func() { npm-run-all \"check-dir -- $1\" --parallel \"build:* -- $1\"; }; func",
+    "watch": "func() { npm-run-all \"check-dir -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func",
 
-    "netlify-challenge": "npx netlify"
+    "copy-template": "func() { [ \"$1\" != '' ] && [ ! -d \"$1\" ] && cp -r _template \"$1\" && cd $1 && sed -i \"s|#CHALLENGE_NAME#|$1|\" README.md; }; func",
+
+    "create-netlify-site": "func() { cd $1 && SITE_LINK=$(npm run --silent get-netlify-site-name $1) && npx netlify sites:create --name $SITE_LINK --with-ci; }; func",
+    "get-github-username": "git config remote.origin.url | grep -oP \"github\\.com\\\/[a-zA-Z0-9_]+\" | grep -oP \"[a-zA-Z0-9_]+$\"",
+    "get-netlify-site-name": "func() { echo \"frontendmentor-$(npm run --silent get-github-username)-$1\"; }; func",
+    "get-netlify-site-link": "func() { echo \"https://$(npm run --silent get-netlify-site-name $1).netlify.app\"; }; func",
+    "add-site-link-to-readme": "func() { cd $1 && sed -i \"s|#LIVE_LINK#|[link]($(npm run --silent get-netlify-site-link $1))|\" README.md; }; func",
+
+    "add-netlify": "func() { npm-run-all \"check-dir -- $1\" \"create-netlify-site -- $1\" \"add-site-link-to-readme -- $1\"; }; func"
   },
   "author": "kucherovvv97@gmail.com",
   "license": "ISC",

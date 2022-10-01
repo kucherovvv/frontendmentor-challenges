@@ -13,7 +13,9 @@
     "prepare-challenge": "func() { [ -d \"$1\" ] && { [ -d \"$1/dist\" ] || mkdir \"$1/dist\"; } }; func",
 
     "build-challenge": "func() { npm-run-all \"prepare-challenge -- $1\" --parallel \"build:* -- $1\"; }; func",
-    "watch-challenge": "func() { npm-run-all \"prepare-challenge -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func"
+    "watch-challenge": "func() { npm-run-all \"prepare-challenge -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func",
+
+    "netlify-challenge": "npx netlify"
   },
   "author": "kucherovvv97@gmail.com",
   "license": "ISC",

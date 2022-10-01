@@ -10,10 +10,10 @@
 
     "live-server": "func() { npx live-server --watch=\"$1/dist\" --open=\"$1/dist\"; }; func",
 
-    "prepare": "func() { [ -d \"$1\" ] && { [ -d \"$1/dist\" ] || mkdir \"$1/dist\"; } }; func",
+    "prepare-challenge": "func() { [ -d \"$1\" ] && { [ -d \"$1/dist\" ] || mkdir \"$1/dist\"; } }; func",
 
-    "build-challenge": "func() { npm-run-all \"prepare -- $1\" --parallel \"build:* -- $1\"; }; func",
-    "watch-challenge": "func() { npm-run-all \"prepare -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func"
+    "build-challenge": "func() { npm-run-all \"prepare-challenge -- $1\" --parallel \"build:* -- $1\"; }; func",
+    "watch-challenge": "func() { npm-run-all \"prepare-challenge -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func"
   },
   "author": "kucherovvv97@gmail.com",
   "license": "ISC",

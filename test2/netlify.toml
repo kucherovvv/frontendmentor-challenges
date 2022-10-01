@@ -1,4 +1,4 @@
 [build]
-  command = "CHALLENGE_DIRNAME=$(basename $(pwd)) && cd .. && npm i && npm run build-challenge $CHALLENGE_DIRNAME"
+  command = "pwd && ls -lah && CHALLENGE_DIRNAME=$(basename $(pwd)) && cd .. && npm i && npm run build-challenge $CHALLENGE_DIRNAME && echo a $NETLIFY_CACHE_DIR a"
   functions = "netlify/functions"
   publish = "/dist"

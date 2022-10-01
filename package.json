@@ -4,26 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "copy-template": "func() { [ \"$1\" != '' ] && [ ! -d \"$1\" ] && cp -r _template \"$1\" && cd $1 && sed -i \"s|#CHALLENGE_NAME#|$1|\" README.md; }; func",
+    "watch": "func() { npm-run-all \"check-dir -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func",
+    "add-netlify": "func() { npm-run-all \"check-dir -- $1\" \"create-netlify-site -- $1\" \"add-site-link-to-readme -- $1\"; }; func",
     "build:babel": "func() { { ls \"$1\"/src/app.*; } && npx babel \"$1/src/\" $2 --out-dir \"$1/dist/\" --extensions \".js,.jsx,.ts,.tsx\" || echo No script file; }; func",
     "build:pug": "func() { npx pug --pretty \"$1/src\" --out \"$1/dist\" $2; }; func",
     "build:sass": "func() { npx sass --no-source-map \"$1/src/style.scss:$1/dist/style.css\" $2; }; func",
-
+    "build:assets": "func() { npx copy-and-watch \"$1/src/assets/**/*\" \"$1/dist/assets/\" $2; }; func",
     "live-server": "func() { npx live-server --watch=\"$1/dist\" --open=\"$1/dist\"; }; func",
-
     "check-dir": "func() { [ -d \"$1\" ] && { [ -d \"$1/dist\" ] || mkdir \"$1/dist\"; } }; func",
-
     "build-challenge": "func() { npm-run-all \"check-dir -- $1\" --parallel \"build:* -- $1\"; }; func",
-    "watch": "func() { npm-run-all \"check-dir -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func",
-
-    "copy-template": "func() { [ \"$1\" != '' ] && [ ! -d \"$1\" ] && cp -r _template \"$1\" && cd $1 && sed -i \"s|#CHALLENGE_NAME#|$1|\" README.md; }; func",
-
     "create-netlify-site": "func() { cd $1 && SITE_LINK=$(npm run --silent get-netlify-site-name $1) && npx netlify sites:create --name $SITE_LINK --with-ci; }; func",
-    "get-github-username": "git config remote.origin.url | grep -oP \"github\\.com\\\/[a-zA-Z0-9_]+\" | grep -oP \"[a-zA-Z0-9_]+$\"",
+    "get-github-username": "git config remote.origin.url | grep -oP \"github\\.com\\/[a-zA-Z0-9_]+\" | grep -oP \"[a-zA-Z0-9_]+$\"",
     "get-netlify-site-name": "func() { echo \"frontendmentor-$(npm run --silent get-github-username)-$1\"; }; func",
     "get-netlify-site-link": "func() { echo \"https://$(npm run --silent get-netlify-site-name $1).netlify.app\"; }; func",
-    "add-site-link-to-readme": "func() { cd $1 && sed -i \"s|#LIVE_LINK#|[link]($(npm run --silent get-netlify-site-link $1))|\" README.md; }; func",
-
-    "add-netlify": "func() { npm-run-all \"check-dir -- $1\" \"create-netlify-site -- $1\" \"add-site-link-to-readme -- $1\"; }; func"
+    "add-site-link-to-readme": "func() { cd $1 && sed -i \"s|#LIVE_LINK#|[link]($(npm run --silent get-netlify-site-link $1))|\" README.md; }; func"
   },
   "author": "kucherovvv97@gmail.com",
   "license": "ISC",
@@ -31,6 +26,7 @@
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.19.3",
+    "copy-and-watch": "^0.1.6",
     "npm-run-all": "^4.1.5",
     "pug": "^3.0.2",
     "pug-cli": "^1.0.0-alpha6",

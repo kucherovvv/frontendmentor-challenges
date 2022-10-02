@@ -1,0 +1,22 @@
+@use 'sass:map';
+
+$breakpoints: (
+    phone: 37.5em,
+    tab-port: 56.25em,
+    tab-land: 75em,
+    big-desktop: 112.5em,
+);
+
+// desktop-first
+@mixin respond-to($breakpointName) {
+    @if not map.has-key($breakpoints, $breakpointName) {
+        @error no breakpoint named $breakpointName;
+    }
+
+    $condition: if($breakpointName == big-desktop, min-width, max-width);
+    $breakpoint: map.get($breakpoints, $breakpointName);
+
+    @media screen and (#{$condition}: #{$breakpoint}) {
+        @content;
+    }
+};

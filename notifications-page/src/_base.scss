@@ -1,0 +1,22 @@
+@use 'abstract' as *;
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 62.5%;
+    @include respond-to(tab-land) { font-size: 56.25% }
+    @include respond-to(tab-port) { font-size: 50% }
+    // @include respond-to(big-desktop) { font-size: 75% }
+    box-sizing: border-box;
+}
+body {
+    font-size: 1.6rem;
+}
+
+.attribution { font-size: 1.1rem; text-align: center; margin-top: 3rem; }
+.attribution a { color: hsl(228, 45%, 44%); }

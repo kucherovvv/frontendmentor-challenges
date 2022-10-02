@@ -1,3 +1,7 @@
+@use 'base';
+@use 'utilities';
+@use 'abstract' as *;
+
 @font-face {
     font-family: "PlusJakartaSans";
     src: url('./assets/fonts/static/PlusJakartaSans-ExtraBold.ttf') format("truetype");
@@ -9,65 +13,64 @@
     font-weight: normal;
 }
 
-$color-primary: #212153;
-$color-primary-light: #6d6da7;
-$color-primary-tint: #f7f9ff;
-$color-primary-tint-2: #e8eeff;
-$color-primary-dark: #121236;
+:root {
+    --color-primary: hsl(219, 85%, 26%);
+    --color-accent: hsl(1, 90%, 64%);
 
-$color-accent: #f58271;
+    --color-primary-light: #6d6da7;
+    --color-primary-dark: hsl(224, 21%, 14%);
 
-$color-dark-grey-1: #333;
-$color-dark-grey-2: #666;
-$color-light-grey-1: #999;
-$color-light-grey-2: #bbb;
-$color-light-grey-3: #eee;
+    --color-very-light-grey: hsl(210, 60%, 98%);
+    --color-light-grey-1: hsl(211, 68%, 94%);
+    --color-light-grey-2: hsl(205, 33%, 90%);
+    --color-grey: hsl(219, 14%, 63%);
+    --color-dark-grey: hsl(219, 12%, 42%);
+};
 
-*,*::after,*::before {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-html {
-    font-size: 62.5%;
-}
 body {
     font-family: 'PlusJakartaSans';
-    font-size: 1.4rem;
-    color: $color-dark-grey-1;
-    background: $color-primary-tint;
+    color: var(--color-dark-grey);
+    background: var(--color-very-light-grey);
 }
 .notifications {
     margin: 5rem;
     background: white;
-    box-shadow: 0 2rem 3rem -1rem rgba($color-primary,.1);
+    box-shadow: 0 2rem 3rem -1rem rgba(var(--color-primary-dark),.1);
     padding: 2rem 2.5rem;
     border-radius: 1rem;
     max-width: 80rem;
     margin: 5rem auto;
-    &__top-box {
+    @include respond-to(phone) {
+        margin: 0;
+        border-radius: 0;
+        padding: 2rem 1.5rem;
+    }
+
+    &__header {
         display: flex;
         align-items: center;
+        margin-bottom: 2.5rem;
     }
     &__heading {
-        font-weight: bold;
+        font-weight: 800;
         margin-right: 1rem;
         font-size: 2.5rem;
+        color: var(--color-primary-dark);
     }
     &__badge {
         margin-right: auto;
-        color: $color-light-grey-3;
+        color: var(--color-light-grey-2);
         border-radius: .5rem;
         padding: .2rem 1rem;
-        font-weight: bold;
-        background: $color-primary;
+        font-weight: 800;
+        background: var(--color-primary);
     }
     &__list {
         margin-top: 1.5rem;
         display: flex;
         flex-direction: column;
     }
-    &__item {
+    &__list-item {
         margin-bottom: .6rem;
     }
 }
@@ -75,14 +78,15 @@ body {
 a {
     outline: none;
     text-decoration: none;
-    font-weight: bold;
-    color: $color-primary;
+    font-weight: 800;
+    color: var(--color-primary);
     cursor: pointer;
+    
     &:hover {
-        color: $color-primary-light;
+        color: var(--color-primary-light);
     }
     &:active {
-        color: $color-primary-dark;
+        color: var(--color-primary-dark);
     }
 }
 
@@ -93,12 +97,12 @@ a {
         border: 0;
         background: none;
         padding: .25rem .4rem;
-        color: $color-dark-grey-2;
+        color: var(--color-dark-grey);
         &:hover {
-            color: $color-light-grey-1;
+            color: var(--color-primary);
         }
         &:active {
-            color: $color-dark-grey-1;
+            color: var(--color-primary-dark);
         }
     }
 }
@@ -106,43 +110,46 @@ a {
 .notification {
     padding: 1.5rem;
     display: flex;
-    border-radius: .5rem;
+    border-radius: .8rem;
     align-items: flex-start;
+    font-size: 1.4rem;
+    transition: .2s background-color;
+
     &__avatar {
-        width: 3.5rem;
+        height: 4rem;
         flex: 0;
         margin-right: 1.5rem;
     }
     &__username {
-        font-weight: bold;
-        color: $color-primary-dark;
+        font-weight: 800;
+        color: var(--color-primary-dark);
+        margin-right: .4rem;
     }
     &__time {
-        font-size: 1.2rem;
-        color: $color-light-grey-2;
+        font-size: 1.4rem;
+        color: var(--color-grey);
         margin-top: .3rem;
     }
-    &__main-box {
+    &__content {
         flex: 1;
     }
     &__text {
-        color: $color-dark-grey-2;
+        color: var(--color-dark-grey);
         flex: 1;
     }
     &__details {
-        border: 1px solid $color-light-grey-3;
-        color: $color-dark-grey-2;
+        border: 1px solid var(--color-light-grey-1);
         padding: 1rem 1.5rem;
         border-radius: .5rem;
         margin-top: 1rem;
         &:hover {
-            background: $color-primary-tint-2;
+            background: var(--color-light-grey-1);
             border-color: transparent;
             cursor: pointer;
         }
     }
     &_unread {
-        background: $color-primary-tint;
+        background: var(--color-very-light-grey);
     }
     &__pic {
         width: 3.5rem;
@@ -150,16 +157,31 @@ a {
         margin-left: 1rem;
         border-radius: .5rem;
         &:hover {
-            outline: .3rem solid $color-primary-tint-2;
+            outline: .3rem solid var(--color-light-grey-1);
             cursor: pointer;
         }
     }
     
     &_unread &__text::after {
-        content: ' \25CF';
-        color: $color-accent;
+        content: '\25CF';
+        color: var(--color-accent);
         font-size: .8rem;
         vertical-align: middle;
         margin-left: .3rem;
+        position: absolute;
+        line-height: 2.5;
+    }
+
+    &_mark-as-read-animating {
+        animation: rise-and-fall;
+    }
+}
+
+@keyframes rise-and-fall {
+    70% {
+        transform: translateY(-.5rem);
+    }
+    85% {
+        transform: translateY(.2rem);
     }
 }

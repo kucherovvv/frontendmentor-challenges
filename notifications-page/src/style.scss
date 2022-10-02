@@ -58,7 +58,6 @@ body {
         color: var(--color-primary-dark);
     }
     &__badge {
-        margin-right: auto;
         color: var(--color-light-grey-2);
         border-radius: .5rem;
         padding: .2rem 1rem;
@@ -72,6 +71,9 @@ body {
     }
     &__list-item {
         margin-bottom: .6rem;
+    }
+    &__mark-as-read {
+        margin-left: auto;
     }
 }
 

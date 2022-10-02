@@ -9,7 +9,12 @@ document.querySelector('#markAllAsRead').addEventListener('click', () => {
         setTimeout(() => {
             el.style.animationDuration = '';
             el.classList.remove('notification_unread', 'notification_mark-as-read-animating');
-            document.querySelector('#unreadCount').textContent = String(document.querySelectorAll('.notification_unread').length);
+
+            const count = document.querySelectorAll('.notification_unread').length;
+            document.querySelector('#unreadCount').textContent = String(count);
+            if (count === 0) {
+                document.querySelector('#unreadCount').style.display = 'none';
+            }
         }, i * DELAY_MS + ANIM_DURATION_MS);
     });
 });

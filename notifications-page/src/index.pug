@@ -13,7 +13,7 @@ html(lang="en")
                 .notifications__header
                     h1.notifications__heading Notifications
                     #unreadCount.notifications__badge= notifs.filter(notif => notif.unread).length
-                    #markAllAsRead.btn.btn-muted Mark all as read
+                    #markAllAsRead.btn.btn-muted.notifications__mark-as-read Mark all as read
                 .notifications__list
                     each notif in notifs
                         .notification.notifications__list-item(class={ notification_unread: notif.unread })

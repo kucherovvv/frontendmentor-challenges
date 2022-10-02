@@ -1,0 +1,12 @@
+$vals: (1:.5rem, 2:1rem, 3:2rem, 4:4rem);
+$dirs: ( b: bottom, t: top, r: right, l: left );
+@each $i, $val in $vals {
+    @each $char, $dir in $dirs {
+        .m#{$char}-#{$i} { margin-#{$dir}: $val }
+        .p#{$char}-#{$i} { padding-#{$dir}: $val }
+    }
+    .mx-#{$i} { margin-left: $val; margin-right: $val }
+    .my-#{$i} { margin-top: $val; margin-bottom: $val }
+    .px-#{$i} { padding-left: $val; padding-right: $val }
+    .py-#{$i} { padding-top: $val; padding-bottom: $val }
+}

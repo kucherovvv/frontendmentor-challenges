@@ -1,0 +1,33 @@
+@use 'abstract' as *;
+
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url('./assets/fonts/static/PlusJakartaSans-ExtraBold.ttf') format("truetype");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "PlusJakartaSans";
+    src: url('./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf') format("truetype");
+    font-weight: normal;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 62.5%;
+    // @include respond-to(tab-land) { font-size: 56.25% }
+    // @include respond-to(tab-port) { font-size: 50% }
+    // @include respond-to(big-desktop) { font-size: 75% }
+    box-sizing: border-box;
+}
+body {
+    font-size: 1.4rem;
+}
+
+.attribution { font-size: 1.1rem; text-align: center; margin-top: 3rem; }
+.attribution a { color: hsl(228, 45%, 44%); }

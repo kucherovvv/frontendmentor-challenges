@@ -1,0 +1,141 @@
+@use 'base';
+@use 'utilities';
+@use 'abstract' as *;
+
+:root {
+    --color-primary: hsl(158, 36%, 37%);
+    --color-primary-dark: hsl(158, 55%, 18%);
+    --color-bg: hsl(30, 38%, 92%);
+
+    --color-dark-blue: hsl(212, 21%, 14%);
+    --color-greyish-blue: hsl(228, 12%, 48%);
+    --white: hsl(0, 0%, 100%);
+
+    --font-primary: 'Montserrat', sans-serif;
+    --font-display: 'Fraunces', serif;
+}
+
+
+html, body {
+    min-height: 100vh;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-bg);
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 1.5rem;
+    @include respond-to(phone) {
+        display: block;
+    }
+}
+
+.card {
+    display: flex;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 3rem 5rem -2rem rgba(black, .2);
+    width: 60rem;
+    background-color: var(--white);
+    @include respond-to(phone) {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    &__image-container {
+        display: flex;
+        flex: 0 0 50%;
+        @include respond-to(phone) {
+            flex-direction: column;
+            flex: 0 0 20rem;
+            height: 24rem;
+        }
+    }
+    &__image {
+        object-fit: cover;
+        width: 100%;
+        @include respond-to(phone) {
+            height: 100%;
+        }
+    }
+
+    &__content {
+        // flex: 0 0 50%;
+        padding: 3rem;
+        color: var(--color-greyish-blue);
+        display: flex;
+        gap: 1.5rem;
+        flex-direction: column;
+        justify-content: space-between;
+        @include respond-to(phone) {
+            padding: 2rem;
+        }
+    }
+    &__description {
+
+    }
+
+    &__category-name {
+        letter-spacing: .4rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 1.4rem;
+        color: var(--color-greyish-blue);
+    }
+    &__product-name {
+        font-family: var(--font-display);
+        color: var(--color-dark-blue);
+        font-size: 3rem;
+        line-height: 1;
+    }
+    &__prices {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+    &__price {
+        font-family: var(--font-display);
+        font-size: 3rem;
+        color: var(--color-primary)
+    }
+    &__price-full {
+        color: var(--color-greyish-blue);
+        text-decoration: line-through;
+    }
+    &__add-to-cart {
+    }
+
+}
+
+.btn {
+    border: 0;
+    border-radius: 1rem;
+    background: var(--color-primary);
+    color: var(--white);
+    padding: 1.5rem 2rem;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+
+    &:active {
+        background: var(--color-primary-dark);
+    }
+
+    &__icon {
+        // height: 1em;
+        vertical-align: top;
+        // width: 1em;
+        margin-right: 1rem;
+        // margin-top: -.2em;
+        fill: currentColor;
+    }
+}

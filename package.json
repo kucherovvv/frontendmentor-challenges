@@ -11,7 +11,7 @@
     "build:pug": "func() { npx pug --pretty \"$1/src/index.pug\" --out \"$1/dist\" $2; }; func",
     "build:sass": "func() { npx sass --no-source-map \"$1/src/style.scss:$1/dist/style.css\" $2; }; func",
     "build:assets": "func() { npx copy-and-watch \"$1/src/assets/**/*\" \"$1/dist/assets/\" $2; }; func",
-    "live-server": "func() { npx live-server --watch=\"$1/dist\" --open=\"$1/dist\" --no-css-inject; }; func",
+    "live-server": "func() { npx live-server  --no-css-inject $1/dist; }; func",
     "check-dir": "func() { [ -d \"$1\" ] && { [ -d \"$1/dist\" ] || mkdir \"$1/dist\"; } }; func",
     "build-challenge": "func() { npm-run-all \"check-dir -- $1\" --parallel \"build:* -- $1\"; }; func",
     "create-netlify-site": "func() { cd $1 && SITE_LINK=$(npm run --silent get-netlify-site-name $1) && npx netlify sites:create --name $SITE_LINK --with-ci; }; func",

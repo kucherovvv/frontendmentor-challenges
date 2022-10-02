@@ -8,7 +8,7 @@
     "watch": "func() { npm-run-all \"check-dir -- $1\" --parallel \"build:* -- $1 --watch\" \"live-server -- $1\"; }; func",
     "add-netlify": "func() { npm-run-all \"check-dir -- $1\" \"create-netlify-site -- $1\" \"add-site-link-to-readme -- $1\"; }; func",
     "build:babel": "func() { { ls \"$1\"/src/app.*; } && npx babel \"$1/src/\" $2 --out-dir \"$1/dist/\" --extensions \".js,.jsx,.ts,.tsx\" --presets @babel/preset-typescript || echo No script file; }; func",
-    "build:pug": "func() { npx pug --pretty \"$1/src\" --out \"$1/dist\" $2; }; func",
+    "build:pug": "func() { npx pug --pretty \"$1/src/index.pug\" --out \"$1/dist\" $2; }; func",
     "build:sass": "func() { npx sass --no-source-map \"$1/src/style.scss:$1/dist/style.css\" $2; }; func",
     "build:assets": "func() { npx copy-and-watch \"$1/src/assets/**/*\" \"$1/dist/assets/\" $2; }; func",
     "live-server": "func() { npx live-server --watch=\"$1/dist\" --open=\"$1/dist\" --no-css-inject; }; func",
